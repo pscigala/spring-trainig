@@ -90,9 +90,7 @@ class SpringTrainingApplicationTests {
 		beanDefinitionRegistry.removeBeanDefinition("myBean");
 
 		assertNotNull(myBeanBeforeRemove);
-		assertThrows(NoSuchBeanDefinitionException.class, () -> {
-			ctx.getBean(MyBean.class);
-		});
+		assertThrows(NoSuchBeanDefinitionException.class, () -> ctx.getBean(MyBean.class));
 	}
 
 	@Test
@@ -102,7 +100,6 @@ class SpringTrainingApplicationTests {
 				.getBeanDefinition();
 
 		((BeanDefinitionRegistry) beanFactory).registerBeanDefinition("newMyBean", newBeanDefinition);
-
 		Object newMyBean = ctx.getBean("newMyBean");
 
 		assertNotNull(newMyBean);
@@ -119,9 +116,7 @@ class SpringTrainingApplicationTests {
 		((BeanDefinitionRegistry) beanFactory).registerBeanDefinition("newMyBean", newBeanDefinition);
 
 		assertNotNull(ctx.getBean("newMyBean"));
-		assertThrows(NoUniqueBeanDefinitionException.class, () -> {
-			ctx.getBean(MyBean.class);
-		});
+		assertThrows(NoUniqueBeanDefinitionException.class, () -> ctx.getBean(MyBean.class));
 	}
 
 	@Test
@@ -148,9 +143,7 @@ class SpringTrainingApplicationTests {
 		((DefaultListableBeanFactory) beanFactory).clearMetadataCache();//this time lets clear metadata cache
 
 		assertNotNull(ctx.getBean("newMyBean"));
-		assertThrows(NoUniqueBeanDefinitionException.class, () -> {
-			ctx.getBean(MyBean.class);
-		});
+		assertThrows(NoUniqueBeanDefinitionException.class, () -> ctx.getBean(MyBean.class));
 	}
 
 	@Test
