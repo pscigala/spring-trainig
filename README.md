@@ -1,4 +1,4 @@
-###Spring Training
+Spring Training
 
 Project aims on personal Spring Framework training. 
 Main goal of this project is to improve Spring knowledge by writing tests that proves some ideas that you can do with Spring or generally how Spring works. 
