@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Przemysław Ścigała on 26.03.2020.
@@ -13,7 +15,7 @@ import javax.annotation.PostConstruct;
 public class MyBean {
 
 	private String myBeanField = "myBeanFieldValue";
-	private Integer postConstructCounter;
+	private List<Integer> postConstructCounter = new ArrayList<>();
 
 	public MyBean() {
 	}
@@ -24,17 +26,17 @@ public class MyBean {
 
 	@PostConstruct
 	public void postConstructOne() {
-		postConstructCounter = 1;
+		postConstructCounter.add(1);
 	}
 
 	@PostConstruct
 	public void postConstructTwo() {
-		postConstructCounter = 2;
+		postConstructCounter.add(2);
 	}
 
 	@PostConstruct
 	public void postConstructThree() {
-		postConstructCounter = 3;
+		postConstructCounter.add(3);
 	}
 
 }

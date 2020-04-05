@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.test.annotation.DirtiesContext;
 import pl.forcode.springtraining.MyBeanWithoutPublicConstructorFactoryMethodComponent.MyBeanWithoutPublicConstructor;
+import pl.forcode.springtraining.aware.MyBeanNameAware;
 import pl.forcode.springtraining.lifecycle.MyPrototypeBeanWithLifecycle;
 
 import java.util.Arrays;
@@ -174,6 +175,9 @@ class SpringTrainingApplicationTests {
 		MyBean bean = ctx.getBean(MyBean.class);
 
 		assertNotNull(bean.getPostConstructCounter());
+		assertTrue(bean.getPostConstructCounter().contains(1));
+		assertTrue(bean.getPostConstructCounter().contains(2));
+		assertTrue(bean.getPostConstructCounter().contains(3));
 	}
 
 	@Test
@@ -185,6 +189,16 @@ class SpringTrainingApplicationTests {
 		assertNotNull(exampleTemplateResource);
 		assertNotNull(resourceAsString);
 		assertEquals("exampleFile", resourceAsString);
+	}
+
+	@Test
+	void bean_should_be_aware_of_its_own_name() {
+		MyBeanNameAware bean = ctx.getBean(MyBeanNameAware.class);
+
+		String beanName = bean.getBeanName();
+
+		assertNotNull(beanName);
+		assertEquals(MyBeanNameAware.MANUALLY_SET_BEAN_NAME, beanName);
 	}
 
 }
