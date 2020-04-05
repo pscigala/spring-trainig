@@ -21,7 +21,8 @@ public class MetricsCollector {
 	}
 
 	@RequiredArgsConstructor
-	public class SimpleMetrics {
+	@Getter
+	public static class SimpleMetrics {
 
 		private final long time;
 		private final String method;
