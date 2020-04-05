@@ -13,6 +13,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.test.annotation.DirtiesContext;
 import pl.forcode.springtraining.MyBeanWithoutPublicConstructorFactoryMethodComponent.MyBeanWithoutPublicConstructor;
 import pl.forcode.springtraining.lifecycle.MyPrototypeBeanWithLifecycle;
@@ -128,9 +129,7 @@ class SpringTrainingApplicationTests {
 		((BeanDefinitionRegistry) beanFactory).registerBeanDefinition("newMyBean", newBeanDefinition);
 
 		assertNotNull(ctx.getBean("newMyBean"));
-		assertDoesNotThrow(() -> {
-			ctx.getBean(MyBean.class);
-		});
+		assertDoesNotThrow(() -> ctx.getBean(MyBean.class));
 	}
 
 	@Test
@@ -169,4 +168,23 @@ class SpringTrainingApplicationTests {
 
 		assertNotEquals(DESTROY, beanWithLifecycle.getState());
 	}
+
+	@Test
+	void multiple_post_construct_works() {
+		MyBean bean = ctx.getBean(MyBean.class);
+
+		assertNotNull(bean.getPostConstructCounter());
+	}
+
+	@Test
+	void inject_file_as_resources_using_value_annotation() {
+		ValueAnnotatedBeanExample bean = ctx.getBean(ValueAnnotatedBeanExample.class);
+		Resource exampleTemplateResource = bean.getResourceInjectedByValueAnnotation();
+		String resourceAsString = bean.resourceAsString();
+
+		assertNotNull(exampleTemplateResource);
+		assertNotNull(resourceAsString);
+		assertEquals("exampleFile", resourceAsString);
+	}
+
 }

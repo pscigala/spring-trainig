@@ -12,7 +12,7 @@ import static java.time.LocalDateTime.now;
 public class CustomFactoryBean extends AbstractFactoryBean<BeanCreatedByCustomFactory> {
 
 	@Override
-	public Class<? super BeanCreatedByCustomFactory> getObjectType() {
+	public Class<BeanCreatedByCustomFactory> getObjectType() {
 		return BeanCreatedByCustomFactory.class;
 	}
 
