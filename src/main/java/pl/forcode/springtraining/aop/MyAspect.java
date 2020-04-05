@@ -28,9 +28,9 @@ public class MyAspect {
 		try {
 			pjp.proceed();
 		} catch (Throwable throwable) {
+			method = "Execption-" + method;
 			log.info("Exception occured");
 			throwable.printStackTrace();
-			method = "Execption-" + method;
 		} finally {
 			stopWatch.stop();
 			log.info("Aspect stopwatch Stop");
